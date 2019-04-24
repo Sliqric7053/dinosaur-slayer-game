@@ -5,9 +5,13 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "local": "npx http-server .",
+    "browserify": "browserify main.js > src/index.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "browserify": "^16.2.3"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.6.1"
   }
