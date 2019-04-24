@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,YACE,qBAAuB,CACvB,WAAY,CACZ,YACF,CAEA,IACE,YACF","file":"styles.320e54ac.css","sourceRoot":"..","sourcesContent":["#gameScreen {\n  border: 1px solid black;\n  width: 800px;\n  height: 600px;\n}\n\nimg {\n  display: none;\n}\n"]}
