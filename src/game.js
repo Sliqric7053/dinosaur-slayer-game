@@ -1,14 +1,9 @@
 import Ball from './ball';
 import Paddle from './paddle';
 import InputHandler from './input';
-import Brick from './brick';
 import { level1, level2, level3, buildLevel } from './levels';
 
-const GAMESIZE = {
-  x: 800,
-  y: 600,
-};
-
+// Enum
 const GAMESTATE = {
   PAUSED: 0,
   RUNNING: 1,
@@ -18,9 +13,9 @@ const GAMESTATE = {
 };
 
 export default class Game {
-  constructor() {
-    this.gameWidth = GAMESIZE.x;
-    this.gameHeight = GAMESIZE.y;
+  constructor(gameWidth, gameHeight) {
+    this.gameWidth = gameWidth;
+    this.gameHeight = gameHeight;
     this.ball = new Ball(this);
     this.paddle = new Paddle(this);
     new InputHandler(this.paddle, this);
@@ -32,7 +27,7 @@ export default class Game {
     this.gameHeight = this.gameHeight;
     this.gamestate = GAMESTATE.MENU;
     this.gameObjects = [];
-    this.lives = 3;
+    this.lives = 1;
     this.bricks = [];
     this.currentLevel = 0;
     this.levels = [level1, level2, level3];
@@ -58,9 +53,6 @@ export default class Game {
     if (this.lives === 0) {
       this.gamestate = GAMESTATE.GAMEOVER;
       console.log('gameover restart game');
-      setTimeout(() => {
-        window.location.reload(true);
-      }, 2500);
       return;
     }
 
@@ -143,6 +135,9 @@ export default class Game {
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
       ctx.fillText('Game Over', this.gameWidth / 2, this.gameHeight / 2);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   }
 
