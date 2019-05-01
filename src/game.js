@@ -58,6 +58,9 @@ export default class Game {
     if (this.lives === 0) {
       this.gamestate = GAMESTATE.GAMEOVER;
       console.log('gameover restart game');
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 2500);
       return;
     }
 
