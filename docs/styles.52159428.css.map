@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"styles.52159428.css","sourceRoot":"..","sourcesContent":["#gameScreen {\n  border: 1px solid black;\n  width: 800px;\n  height: 600px;\n}\n\nimg {\n  display: none;\n}\n"]}
