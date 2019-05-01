@@ -27,7 +27,7 @@ export default class Game {
     this.gameHeight = this.gameHeight;
     this.gamestate = GAMESTATE.MENU;
     this.gameObjects = [];
-    this.lives = 1;
+    this.lives = 3;
     this.bricks = [];
     this.currentLevel = 0;
     this.levels = [level1, level2, level3];
@@ -136,7 +136,7 @@ export default class Game {
       ctx.textAlign = 'center';
       ctx.fillText('Game Over', this.gameWidth / 2, this.gameHeight / 2);
       setTimeout(() => {
-        window.location.reload();
+        window.location.reload(true);
       }, 2000);
     }
   }
