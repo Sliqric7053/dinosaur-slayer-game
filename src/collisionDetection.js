@@ -1,3 +1,10 @@
+/**
+  Defines the parameter of the canvas in relation to the ball object
+ *
+ * @param {*} ball
+ * @param {*} gameObject
+ * @returns {*} boolean
+ */
 export function detectCollision(ball, gameObject) {
   let bottomOfBall = ball.position.y + ball.size;
   let topOfBall = ball.position.y;
