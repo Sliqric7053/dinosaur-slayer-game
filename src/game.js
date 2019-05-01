@@ -1,44 +1,30 @@
-import Ball from "./ball";
-import Paddle from "./paddle";
-import InputHandler from "./input";
-import Brick from "./brick";
-import { level1, level2, level3, buildLevel } from "./levels";
+import Ball from './ball';
+import Paddle from './paddle';
+import InputHandler from './input';
+import Brick from './brick';
+import { level1, level2, level3, buildLevel } from './levels';
+
+const GAMESIZE = {
+  x: 800,
+  y: 600,
+};
 
 const GAMESTATE = {
   PAUSED: 0,
   RUNNING: 1,
   MENU: 2,
   GAMEOVER: 3,
-  NEWLEVEL: 4
+  NEWLEVEL: 4,
 };
 
-let bitZar;
-
-fetch("https://api.mybitx.com/api/1/ticker?pair=XBTZAR")
-  .then(response => {
-    if (response.status !== 200) {
-      console.log("Error, Status Code: " + response.status);
-      return;
-    }
-    // Check text in the response
-    response.json().then(data => {
-      if (data.last_trade) {
-        bitZar = data.last_trade;
-      } else {
-        bitZar = "Bullocks - Not available at the moment :(";
-      }
-    });
-  })
-  .catch(err => {
-    console.log("Fetch Error: ", err);
-  });
-
 export default class Game {
-  constructor(gameWidth, gameHeight) {
+  constructor() {
+    this.gameWidth = GAMESIZE.x;
+    this.gameHeight = GAMESIZE.y;
     this.ball = new Ball(this);
     this.paddle = new Paddle(this);
     new InputHandler(this.paddle, this);
-    this.setupGame()
+    this.setupGame();
   }
 
   setupGame() {
@@ -70,14 +56,8 @@ export default class Game {
 
   update(deltaTime) {
     if (this.lives === 0) {
-      // this.gamestate = GAMESTATE.GAMEOVER;
-      // this.start();
       this.gamestate = GAMESTATE.GAMEOVER;
-      // setTimeout(() => {
-      // this.gamestate = GAMESTATE.MENU;
-      // this.start();
-      // }, 2000);
-      console.log("gameover restart game");
+      console.log('gameover restart game');
       return;
     }
 
@@ -114,58 +94,52 @@ export default class Game {
     if (this.gamestate === GAMESTATE.MENU) {
       // draw background
       ctx.rect(0, 0, this.gameWidth, this.gameHeight);
-      ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       ctx.fill();
 
       // write text
-      ctx.font = "50px Helvetica Neue";
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
+      ctx.font = '50px Helvetica Neue';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
       ctx.fillText(
-        "Hit SPACEBAR to begin",
+        'Hit SPACEBAR to begin',
         this.gameWidth / 2,
         this.gameHeight / 2
       );
-      ctx.font = "20px Helvetica Neue";
+      ctx.font = '20px Helvetica Neue';
       ctx.fillText(
-        "Hit ESC to Pause",
+        'Hit ESC to Pause',
         this.gameWidth / 2,
         this.gameHeight / 2 + 90
       );
-      ctx.font = "20px Helvetica Neue";
-      ctx.fillText(
-        "Bitcoin to ZAR: " + bitZar,
-        this.gameWidth / 2,
-        this.gameHeight / 2 - 250
-      );
+      ctx.font = '20px Helvetica Neue';
     }
 
     if (this.gamestate === GAMESTATE.PAUSED) {
       // this.page404(ctx, canvas)
       // draw background
       ctx.rect(0, 0, this.gameWidth, this.gameHeight);
-      ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
       ctx.fill();
 
       // write text
-      ctx.font = "50px Helvetica Neue";
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
-      ctx.fillText("Game Paused", this.gameWidth / 2, this.gameHeight / 2 + 90);
-
+      ctx.font = '50px Helvetica Neue';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
+      ctx.fillText('Game Paused', this.gameWidth / 2, this.gameHeight / 2 + 90);
     }
 
     if (this.gamestate === GAMESTATE.GAMEOVER) {
       // draw background
       ctx.rect(0, 0, this.gameWidth, this.gameHeight);
-      ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       ctx.fill();
 
       // write text
-      ctx.font = "50px Helvetica Neue";
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
-      ctx.fillText("Game Over", this.gameWidth / 2, this.gameHeight / 2);
+      ctx.font = '50px Helvetica Neue';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
+      ctx.fillText('Game Over', this.gameWidth / 2, this.gameHeight / 2);
     }
   }
 
@@ -178,19 +152,6 @@ export default class Game {
       this.gamestate = GAMESTATE.PAUSED;
     }
   }
-
-  // toTheMoon() {
-  //   fetch("https://api.mybitx.com/api/1/ticker?pair=XBTZAR")
-  //     .then(function(response) {
-  //       return response.text();
-  //     })
-  //     .then(function(text) {
-  //       console.log("Request successful", text);
-  //     })
-  //     .catch(function(error) {
-  //       console.log("Request failed", error);
-  //     });
-  // }
 
   page404(ctx, canvas) {
     // const canvas = document.getElementById('canvas');
@@ -255,10 +216,10 @@ export default class Game {
 
     img.onload = () => {
       init();
-    	window.onresize = init;
+      window.onresize = init;
     };
 
     img.src =
-      "https://singaporefintech.org/wp-content/uploads/2017/11/Luno_Logo_Blue_Large-3.png";
+      'https://singaporefintech.org/wp-content/uploads/2017/11/Luno_Logo_Blue_Large-3.png';
   }
 }
